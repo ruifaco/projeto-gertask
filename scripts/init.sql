@@ -6,7 +6,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE usuarios(
   id INT PRIMARY KEY,
   email VARCHAR(100),
-  senha VARCHAR (200)
+  senha VARCHAR(200)
 );
 
 CREATE TABLE tasks(
@@ -15,5 +15,5 @@ CREATE TABLE tasks(
   prazo TIMESTAMP,
   inicio TIMESTAMP, 
   id_usuario INT,
-  FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
