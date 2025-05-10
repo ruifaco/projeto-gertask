@@ -49,6 +49,7 @@ _Posicione aqui a lista de User Stories levantadas para o projeto. Siga o templa
 ![Diagrama do Projeto](../assets/modelo-banco_page-0001.jpg)
 
 ```
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE usuarios(
   id INT PRIMARY KEY,
