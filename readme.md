@@ -8,34 +8,38 @@ A proposta é oferecer uma solução simples, funcional e eficiente, substituind
 
 ### 📁 Estrutura de pastas
 
-Cada pasta e subpasta possui uma função específica na organização e no armazenamento dos diversos recursos do projeto, como o código-fonte, elementos visuais e sons. Compreender essa estrutura facilita a navegação entre os arquivos, permitindo que a equipe e colaboradores externos desenvolvam, mantenham e contribuam com o projeto de forma mais eficiente.
+Compreender essa estrutura facilita a navegação entre os arquivos, permitindo que a equipe e colaboradores externos desenvolvam, mantenham e contribuam com o projeto de forma mais eficiente.
 
 ```bash
-meu-projeto/
-│
-├── config/                # Arquivos de configuração (ex: conexão com banco)
+MVC-BOILERPLATE/
+├── assets/
+│   └── assets/modelo-banco_page-0001.jpg
+├── config/
 │   └── database.js
-├── controllers/           # Lógica de controle das requisições
-│   └── HomeController.js
-├── models/                # Definição de modelos de dados (estrutura do banco)
-│   └── User.js
-├── routes/                # Definição das rotas do sistema
-│   └── index.js
-├── services/              # Serviços auxiliares do sistema
+├── controllers/
+│   └── userController.js
+├── documentos/
+│   └── wad.md
+├── models/
+│   └── UserModel.js
+├── routes/
+│   └── frontRoutes.js
+├── └── userRoutes.js
+├── services/
 │   └── userService.js
-├── assets/                # Arquivos públicos como imagens e fontes
-├── scripts/               # Arquivos de JavaScript públicos
-├── styles/                # Arquivos CSS públicos
-├── tests/                 # Arquivos de testes unitários
+├── assets/
+├── scripts/
+├── styles/
+├── tests/
 │   └── example.test.js
-├── .gitignore             # Arquivo para ignorar arquivos no Git
-├── .env.example           # Arquivo de exemplo para variáveis de ambiente
-├── jest.config.js         # Arquivo de configuração do Jest
-├── package-lock.json      # Gerenciador de dependências do Node.js
-├── package.json           # Gerenciador de dependências do Node.js
-├── readme.md              # Documentação do projeto (Markdown)
-├── server.js              # Arquivo principal que inicializa o servidor
-└── rest.http              # Teste de endpoints (opcional)
+├── .gitignore
+├── .env
+├── jest.config.js
+├── package-lock.json
+├── package.json
+├── readme.md
+├── server.js
+└── rest.http
 ```
 
 ### Como executar
