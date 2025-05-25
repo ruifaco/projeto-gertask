@@ -1,0 +1,6 @@
+DB_HOST=aws-0-sa-east-1.pooler.supabase.com
+DB_PORT=5432
+DB_USER=postgres.klesihlkeankpwgezzkt
+DB_PASSWORD=meuprojeto123
+DB_DATABASE=postgres
+DB_SSL=true
