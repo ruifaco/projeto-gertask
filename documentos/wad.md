@@ -81,7 +81,11 @@ VALUES
 
 ### 3.1.1 BD e Models (Semana 5)
 
-_Descreva aqui os Models implementados no sistema web_
+Para este sistema, a modelagem dos dados foi pensada de forma direta, sem a utilização de uma camada de ORM (Object-Relational Mapper) que abstrairia o banco de dados. Desta forma, os "Models" da aplicação são representados, fundamentalmente, pela própria estrutura das tabelas usuarios e tasks definidas no banco de dados PostgreSQL. A lógica para interagir com esses dados, ou seja, para realizar operações baseadas no CRUD, é implementada através de comandos SQL puros. Estes comandos são escritos diretamente nos controllers da aplicação ou, em alguns casos, podem estar encapsulados em funções de serviço auxiliares, e são executados utilizando o pacote pg do Node.js para a comunicação com o banco.
+
+A tabela usuarios é a base para a gestão dos usuários do sistema. Ela armazena informações essenciais como um id único para cada pessoa, seu email (que também funciona como um identificador único para login) e a senha necessária para acesso à plataforma.
+
+Já a tabela tasks é onde são guardados os detalhes de cada tarefa que os usuários gerenciam. Cada tarefa possui um id (que é auto-incrementado pelo banco de dados), um titulo descritivo, informações de prazo e data de inicio (ambos como timestamps) e um id_usuario. Este último campo estabelece a ligação direta com a tabela usuarios, assegurando que cada tarefa tenha um proprietário e permitindo que os usuários visualizem e gerenciem apenas suas próprias atividades.
 
 ### 3.2. Arquitetura (Semana 5)
 
@@ -109,7 +113,23 @@ _Posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelid
 
 ### 3.6. WebAPI e endpoints (Semana 05)
 
-_Utilize um link para outra página de documentação contendo a descrição completa de cada endpoint. Ou descreva aqui cada endpoint criado para seu sistema._
+A aplicação expõe uma WebAPI RESTful para permitir a interação com os recursos do sistema, primariamente para o gerenciamento de tarefas e usuários. Todos os endpoints da API estão agrupados sob o prefixo base /api. A comunicação com a API utiliza o formato JSON para os corpos das requisições e respostas.
+
+**Endpoints de Tarefas**
+
+A gestão de tarefas é realizada através dos seguintes endpoints:
+
+1. Criação de Nova Tarefa: Para adicionar uma nova tarefa ao sistema, é disponibilizado o endpoint POST /api/tasks. Este endpoint espera um corpo de requisição no formato JSON contendo os detalhes da tarefa, incluindo titulo (string, obrigatório), prazo, inicio, e id_usuario. Em caso de sucesso, a API retorna o status 201 Created e um objeto JSON representando a tarefa recém-criada, incluindo seu id gerado pelo sistema. Se os dados fornecidos forem inválidos ou campos obrigatórios estiverem ausentes, um status 400 Bad Request será retornado com uma mensagem de erro. Erros de chave estrangeira podem resultar em um erro 500 Internal Server Error ou um erro mais específico dependendo da configuração do banco.
+
+2. Listagem de Todas as Tarefas: Para obter uma lista de todas as tarefas cadastradas, utiliza-se o endpoint GET /api/tasks. Esta requisição não exige corpo nem parâmetros adicionais. A API responderá com o status 200 OK e um array JSON contendo todos os objetos de tarefa. Se não houver tarefas, um array vazio será retornado. Em caso de falha na consulta ao banco, um erro 500 Internal Server Error pode ocorrer.
+
+3. Atualização de Tarefa Existente: A modificação de uma tarefa existente é realizada através do endpoint PUT /api/tasks/:id, onde :id representa o identificador numérico da tarefa a ser atualizada. O corpo da requisição deve ser um JSON contendo os campos a serem alterados: titulo (string), prazo (timestamp ISO), e inicio (timestamp). Se a tarefa for encontrada e atualizada com sucesso, a API retorna o status 200 OK e o objeto JSON da tarefa com os dados modificados. Caso a tarefa com o id especificado não seja encontrada, um status 404 Not Found é retornado.
+
+4. Exclusão de Tarefa: Para remover uma tarefa do sistema, o endpoint DELETE /api/tasks/:id é utilizado, onde :id é o ID da tarefa a ser excluída. Esta requisição não necessita de um corpo. Se a tarefa for encontrada e excluída com sucesso, a API responde com o status 200 OK, uma mensagem de confirmação, e o objeto da tarefa que foi removida. Se nenhuma tarefa com o id fornecido for encontrada, um status 404 Not Found será retornado.
+
+**Endpoints de Usuários**
+
+O sistema também possui endpoints para gerenciamento de usuários, localizados sob /api/users. Estes incluem funcionalidades para criar, listar, buscar por ID, atualizar e excluir usuários.
 
 ### 3.7 Interface e Navegação (Semana 07)
 
