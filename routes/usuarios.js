@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/usuarios', (req, res) => {
-  res.send('rota de usuários');
-});
+// importa o controller
+const usuariosController = require('../controllers/usuariosController');
+
+// usa a função do controller como callback da rota
+router.get('/usuarios', usuariosController.listarUsuarios);
 
 module.exports = router;
