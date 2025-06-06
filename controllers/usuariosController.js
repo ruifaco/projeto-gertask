@@ -10,6 +10,26 @@ const listarUsuarios = async (req, res) => {
   }
 };
 
+// busca usuário por ID
+
+const buscarUsuarioPorId = async (req, res) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const usuario = await UsuarioModel.buscarPorId(id);
+
+    if (!usuario) {
+      return res.status(404).json({ erro: 'Usuário não encontrado' });
+    }
+
+    res.json(usuario);
+  } catch (error) {
+    console.error('Erro ao buscar usuário por ID:', error);
+    res.status(500).json({ erro: 'Erro interno no servidor' });
+  }
+};
+
+
 module.exports = {
-  listarUsuarios,
+  listarUsuarios,  buscarUsuarioPorId,
 };
