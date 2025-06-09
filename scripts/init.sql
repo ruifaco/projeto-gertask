@@ -1,28 +1,23 @@
-
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 CREATE TABLE usuarios (
-  id INT PRIMARY KEY,
-  email VARCHAR(100),
-  senha VARCHAR(200)
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  senha VARCHAR(200) NOT NULL
 );
 
-INSERT INTO usuarios (id, email, senha)
+INSERT INTO usuarios (email, senha)
 VALUES
-  (1, 'leonardobote321nitro', 'bolinhodearroz44'),
-  (2, 'vasconelho654tribo', 'serelepeoi90');
+  ('leonardobote321nitro@example.com', 'bolinhodearroz44'),
+  ('vasconelho654tribo@example.com', 'serelepeoi90');
 
 CREATE TABLE tasks (
-  id INT PRIMARY KEY,
-  titulo VARCHAR(100),
-  prazo INT,
+  id SERIAL PRIMARY KEY,
+  titulo VARCHAR(100) NOT NULL,
+  prazo TIMESTAMP,
   inicio DATE,
   id_usuario INT,
-  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
-INSERT INTO tasks (id, titulo, prazo, inicio, id_usuario)
+INSERT INTO tasks (titulo, prazo, inicio, id_usuario)
 VALUES 
-  (1, 'Ir à academia', '2025-06-10 14:00:00', '2025-06-04', 1),
-  (2, 'Estudar Node.js', '2025-06-12 18:00:00', '2025-06-04', 1),
-  (3, 'Fazer compras', '2025-06-07 10:30:00', '2025-06-05', 2);
+  ('Ir à academia', '2025-06-10 14:00:00', '2025-06-04', 1),
