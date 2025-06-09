@@ -9,7 +9,8 @@
   <h1>Editar Tarefa</h1>
 
   <form id="form-editar">
-    <input type="hidden" id="id" value="<%= tarefa.id %>">
+    
+    <input type="hidden" id="tarefa-id" value="<%= tarefa.id %>">
 
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" value="<%= tarefa.titulo %>" required><br>
@@ -24,30 +25,40 @@
       value="<%= tarefa.inicio ? tarefa.inicio.toISOString().split('T')[0] : '' %>" 
       required><br>
     
+    <input type="hidden" id="id_usuario" value="<%= tarefa.id_usuario %>">
 
-    <label for="id_usuario">ID do Usuário:</label>
-    <input type="text" id="id_usuario" value="<%= tarefa.id_usuario %>" required><br>
-
-    <button type="submit">Salvar</button>
+    <button type="submit">Salvar Alterações</button>
   </form>
 
   <script>
     document.getElementById('form-editar').addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const id = document.getElementById('id').value;
+      const id = document.getElementById('tarefa-id').value;
+
       const titulo = document.getElementById('titulo').value;
       const prazo = document.getElementById('prazo').value;
       const inicio = document.getElementById('inicio').value;
       const id_usuario = document.getElementById('id_usuario').value;
 
-      await fetch(`/api/tarefas/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ titulo, prazo, inicio, id_usuario })
-      });
+      try {
+        const response = await fetch(`/tasks/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ titulo, prazo, inicio, id_usuario })
+        });
 
-      window.location.href = '/tarefas';
+        if (response.ok) {
+          alert('Tarefa atualizada com sucesso!');
+          window.location.href = '/tarefas'; 
+        } else {
+          const data = await response.json();
+          alert('Erro ao atualizar tarefa: ' + (data.erro || 'Erro desconhecido'));
+        }
+      } catch (error) {
+        console.error('Erro de comunicação:', error);
+        alert('Falha na comunicação com o servidor.');
+      }
     });
   </script>
 </body>
