@@ -1,45 +1,60 @@
-### 📜 Descrição
+# 🎯 GerTask - Gerenciador de Tarefas
 
-O sistema desenvolvido é um gerenciador de tarefas online, voltado para pessoas com rotinas agitadas que precisam organizar seus compromissos diários de forma prática e acessível. A aplicação permite que cada usuário cadastre suas tarefas com informações como título, data de início e prazo, facilitando o controle e acompanhamento das atividades ao longo do tempo.
+O GerTask é um sistema gerenciador de tarefas online, voltado para pessoas com rotinas agitadas que precisam organizar seus compromissos diários de forma prática e acessível. A aplicação permite que cada usuário cadastre e gerencie suas tarefas, promovendo mais organização e produtividade no cotidiano.
 
-Para utilizar o sistema, o usuário deve realizar um cadastro com e-mail e senha, garantindo acesso individualizado e seguro às suas tarefas. Os dados são armazenados em um banco de dados estruturado, que inicialmente conta com duas entidades principais: usuário e tasks. Cada tarefa está diretamente vinculada ao usuário que a criou, possibilitando uma gestão personalizada.
+## ✨ Funcionalidades Principais
 
-A proposta é oferecer uma solução simples, funcional e eficiente, substituindo o uso de agendas físicas e promovendo mais organização no cotidiano dos usuários. O sistema foi projetado para ser leve, intuitivo e de fácil manutenção, prezando pela experiência do usuário e pela escalabilidade da aplicação.
+-   [x] **Autenticação de Usuários:** Cadastro e sistema de acesso seguro com e-mail e senha.
+-   [x] **Gerenciamento de Tarefas (CRUD):**
+    -   Criação de novas tarefas com título, data de início e prazo.
+    -   Visualização de todas as tarefas em uma lista centralizada.
+    -   Edição de tarefas existentes.
+    -   Exclusão de tarefas.
+-   [ ] **Gerenciamento de Usuários (Em desenvolvimento):**
+    -   Criação e listagem de usuários.
+    -   (Futuro) Atualização e exclusão lógica de usuários.
 
-### 📁 Estrutura de pastas
+## 🛠️ Tecnologias Utilizadas
 
-Compreender essa estrutura facilita a navegação entre os arquivos, permitindo que a equipe e colaboradores externos desenvolvam, mantenham e contribuam com o projeto de forma mais eficiente.
+-   **Backend:** Node.js, Express.js
+-   **Banco de Dados:** PostgreSQL (hospedado no Supabase)
+-   **Frontend (Views):** EJS (Embedded JavaScript templates)
+-   **Testes:** Jest
+-   **Variáveis de Ambiente:** Dotenv
+
+## 📁 Estrutura de Pastas
+
+A estrutura do projeto segue uma arquitetura baseada no padrão MVC (Model-View-Controller), com uma camada de Serviço adicional para a lógica de negócios.
 
 ```bash
+├── app.js
 ├── assets
 │   ├── favicon.ico
 │   └── modelo-banco_page-0001.jpg
 ├── config
 │   └── db.js
 ├── controllers
-│   ├── TarefaController.js
+│   ├── tasksController.js
 │   └── userController.js
 ├── documentos
 │   └── wad.md
 ├── jest.config.js
 ├── models
+│   ├── taskModel.js
 │   └── userModel.js
-├── node_modules
 ├── package-lock.json
 ├── package.json
+├── public
+│   └── css
+│       └── style.css
 ├── readme.md
 ├── rest.http
 ├── routes
-│   ├── frontRoutes.js
-│   ├── index.js
-│   ├── taskRoutes.js
-│   └── userRoutes.js
+│   ├── tasks.js
+│   └── usuarios.js
 ├── scripts
 │   ├── init.sql
 │   └── runSQLScript.js
-├── server.js
-├── services
-│   └── userService.js
 ├── tests
 │   ├── userController.test.js
 │   ├── userModel.test.js
@@ -47,17 +62,88 @@ Compreender essa estrutura facilita a navegação entre os arquivos, permitindo 
 │   └── userService.test.js
 └── views
     ├── components
-    ├── css
+    │   └── header.ejs
     ├── layout
+    │   └── main.ejs
     └── pages
+        ├── editarTask.ejs
+        ├── newTask.ejs
+        ├── newUser.ejs
+        └── tasks.ejs
 ```
 
-### Como executar
+## 🚀 Como Executar o Projeto
 
-Para colocar o projeto em funcionamento no seu ambiente local, alguns passos são necessários. Primeiro, certifique-se de ter o Node.js e o npm instalados. Após clonar o repositório para sua máquina, navegue até a pasta raiz do projeto pelo terminal e instale todas as dependências listadas no package.json com o comando npm install.
+Siga os passos abaixo para configurar e executar o projeto em seu ambiente local.
 
-Com as dependências instaladas, o próximo passo crucial é configurar a conexão com o banco de dados PostgreSQL, que neste projeto é hospedado na plataforma Supabase. Você precisará obter as credenciais de acesso ao seu banco de dados no painel do Supabase. Em seguida, crie um arquivo chamado .env na raiz do projeto. Dentro deste arquivo, você definirá as variáveis de ambiente necessárias para a conexão, como DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE, e DB_SSL.
+### **1. Pré-requisitos**
 
-Após configurar as variáveis de ambiente, é preciso definir a estrutura do banco de dados. As tabelas usuarios e tasks são criadas através de comandos SQL. É fundamental que a tabela tasks tenha a coluna id como SERIAL PRIMARY KEY para auto-incremento e que a chave estrangeira id_usuario referencie corretamente a tabela usuarios, idealmente com ON DELETE CASCADE.
+-   [Node.js](https://nodejs.org/en/) (versão 16 ou superior)
+-   [Git](https://git-scm.com/)
+-   Uma conta no [Supabase](https://supabase.com/) para hospedar o banco de dados.
 
-Com tudo isso pronto, o servidor pode ser iniciado. Para desenvolvimento, se você tiver um script configurado (como npm run dev usando nodemon), ele permitirá que o servidor reinicie automaticamente a cada mudança no código. Alternativamente, você pode usar node server.js para uma execução normal. Uma vez iniciado, o sistema estará acessível no seu navegador geralmente em http://localhost:3000, e a API estará disponível em http://localhost:3000/api.
+### **2. Clonando o Repositório**
+
+```bash
+git clone https://github.com/ruifaco/projeto-gertask
+cd projeto-gertask
+```
+
+### **3. Instalando as Dependências**
+
+```bash
+npm install
+```
+
+### **4. Configurando o Ambiente**
+
+As credenciais do banco de dados são gerenciadas por variáveis de ambiente.
+
+a. Crie um arquivo chamado `.env` na raiz do projeto.
+
+b. Copie o conteúdo abaixo para o seu arquivo `.env` e preencha com as suas credenciais do Supabase (encontradas em **Project Settings > Database**).
+
+```env
+# Credenciais do Banco de Dados Supabase
+DB_HOST=db.xxxxxxxx.supabase.co
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD="SUA_SENHA_AQUI"
+DB_DATABASE=postgres
+DB_SSL=true
+```
+
+### **5. Configurando o Banco de Dados**
+
+O projeto inclui um script para criar as tabelas `usuarios` e `tasks` automaticamente. Para executá-lo, use o comando:
+
+```bash
+node scripts/runSQLScript.js
+```
+*(Nota: Certifique-se de que o script `runSQLScript.js` está configurado para ler e executar o `init.sql`)*
+
+### **6. Iniciando o Servidor**
+
+-   Para ambiente de desenvolvimento (com reinício automático):
+    ```bash
+    npm run dev
+    ```
+-   Para execução normal:
+    ```bash
+    node app.js
+    ```
+
+O servidor estará rodando em `http://localhost:3000`.
+
+## 🔗 Endpoints da API
+
+A API segue os princípios REST. Abaixo estão os endpoints principais:
+
+| Método | Endpoint          | Descrição                     |
+| :----- | :---------------- | :---------------------------- |
+| `POST` | `/usuarios`       | Cria um novo usuário.           |
+| `GET`  | `/usuarios`       | Lista todos os usuários.        |
+| `POST` | `/tasks`          | Cria uma nova tarefa.           |
+| `GET`  | `/tasks`          | Lista todas as tarefas.         |
+| `PUT`  | `/tasks/:id`      | Atualiza uma tarefa existente.  |
+| `DELETE` | `/tasks/:id`    | Deleta uma tarefa.              |

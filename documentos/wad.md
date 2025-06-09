@@ -133,7 +133,71 @@ O sistema também possui endpoints para gerenciamento de usuários, localizados 
 
 ### 3.7 Interface e Navegação (Semana 07)
 
-_Descreva e ilustre aqui o desenvolvimento do frontend do sistema web, explicando brevemente o que foi entregue em termos de código e sistema. Utilize prints de tela para ilustrar._
+**Visão Geral do Frontend:**
+
+O frontend foi desenvolvido com uma abordagem híbrida, focada em criar uma experiência de usuário fluida e reativa. A arquitetura combina a renderização inicial de páginas no servidor, utilizando EJS, com uma interatividade dinâmica no lado do cliente, implementada com JavaScript puro e a Fetch API.
+
+O principal objetivo dessa arquitetura foi evitar recarregamentos completos da página durante operações de dados (como criar ou deletar uma tarefa), tornando a aplicação mais rápida e com uma sensação de modernidade. A estilização foi feita com CSS puro, priorizando uma interface limpa, organizada e funcional.
+
+**Estrutura e Componentes das Views (EJS)**
+
+As views, localizadas em views/pages, são responsáveis por estruturar o HTML de cada tela do sistema. O EJS foi utilizado para permitir a inserção de dados vindos do backend diretamente no HTML no momento da renderização inicial, como no caso da listagem de tarefas.
+
+As principais views desenvolvidas foram:
+
+- Página Principal (tasks.ejs): É o painel central da aplicação. Esta página é responsável por listar todas as tarefas existentes de um usuário. Ela serve como ponto de partida para todas as outras ações, contendo os botões de navegação para "Nova Tarefa", "Novo Usuário", e os controles de "Editar" e "Deletar" para cada item da lista.
+
+- Formulários de Criação e Edição: Foram criadas views dedicadas para os formulários, garantindo que a experiência de inserção de dados seja focada e sem distrações. Isso inclui newTask.ejs, editarTask.ejs e newUser.ejs. Todos seguem um design consistente para facilitar o uso.
+
+- Estilização e Experiência do Usuário (CSS):
+A estilização visual do projeto foi construída do zero com CSS puro. O foco foi criar uma interface que fosse ao mesmo tempo agradável e intuitiva.
+
+1. Layout: Foi utilizado Flexbox para organizar os principais componentes de layout, como o alinhamento de itens nos cards de tarefas, a centralização de contêineres e a disposição dos campos nos formulários.
+2. Usabilidade: Elementos interativos como botões e campos de input possuem feedback visual claro, com transições suaves e mudanças de estilo nos estados :hover e :focus, guiando o usuário em suas ações.
+3. Consistência Visual: Uma paleta de cores coesa e uma tipografia legível foram aplicadas em todo o sistema para criar uma identidade visual consistente e profissional.
+
+**Integração Dinâmica com a API via Fetch**
+
+A interatividade do sistema é o seu grande diferencial. Em vez de submissões de formulário tradicionais que recarregam a página, toda a comunicação de dados é feita de forma assíncrona no background.
+
+O mecanismo funciona da seguinte forma:
+
+1. Um script JavaScript é adicionado a cada página com um formulário (ex: newUser.ejs).
+2. Esse script adiciona um "ouvinte" ao evento de submit do formulário.
+3. Quando o usuário clica em "Criar", o script previne o comportamento padrão do formulário (event.preventDefault()).
+4. Os dados dos campos de input são coletados.
+5. Uma requisição fetch é montada e enviada para o endpoint correspondente da API no backend (ex: POST /usuarios). O corpo da requisição é um objeto JSON com os dados do formulário.
+6. O script aguarda a resposta do servidor. Em caso de sucesso, ele exibe um alerta (alert()) para o usuário e o redireciona para a página principal (window.location.href), onde os novos dados estarão visíveis. Em caso de erro, um alerta com a mensagem de erro do backend é exibido.
+7. O mesmo princípio se aplica à exclusão de tarefas, onde o botão "Deletar" aciona uma função que envia uma requisição DELETE via fetch.
+
+
+
+<img src="../assets/fetch.png" width="700">
+
+---
+
+**Criação de Usuário:** O fluxo pode se iniciar na tela de criação de um novo usuário.
+
+<img src="../assets/newuser.png" width="500">
+
+---
+
+**Criação de Tarefa:** O usuário clica em "Nova Tarefa", é levado ao formulário, preenche os dados e salva.
+
+<img src="../assets/newtask.png" width="500">
+
+---
+
+**Lista Atualizada:** Após a criação, ele é redirecionado de volta à tela principal, que agora exibe a tarefa recém-criada.
+
+<img src="../assets/home.png" width="500">
+
+---
+
+**Edição:** Ao clicar em "Editar", o usuário é levado a um formulário pré-preenchido com os dados da tarefa, onde pode fazer alterações e salvar.
+
+<img src="../assets/edit.png" width="500">
+
 
 ---
 
