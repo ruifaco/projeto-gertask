@@ -1,0 +1,181 @@
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f6; /* Um cinza bem claro para o fundo */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; 
+  }
+  
+  h1 {
+    color: #005f73; 
+    margin-bottom: 30px;
+  }
+  
+
+  #form-editar,
+  #form-nova {
+    background-color: #ffffff; /* Fundo branco para o container do formulário */
+    padding: 30px;
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Uma sombra sutil (Box Model) */
+    width: 100%;
+    max-width: 500px; /* Impede que o formulário fique largo demais em telas grandes */
+    /* Usando Flexbox para organizar os itens do formulário */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os elementos do formulário */
+  }
+  
+  form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Estilizando todos os inputs de texto e data */
+  form input[type="text"],
+  form input[type="date"] {
+    width: calc(100% - 20px); /* Evita que o padding "estoure" a largura */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    /* Usando transição para suavizar o efeito de foco */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Pseudo-classe :focus para dar feedback visual quando o usuário clica no input */
+  form input[type="text"]:focus,
+  form input[type="date"]:focus {
+    outline: none; /* Remove a borda padrão do navegador */
+    border-color: #005f73; /* Muda a cor da borda para a cor de destaque */
+    box-shadow: 0 0 5px rgba(0, 95, 115, 0.5);
+  }
+  
+  /* --- ESTILOS PARA OS BOTÕES --- */
+  /* Um estilo base para todos os botões e links que parecem botões */
+  button,
+  a.btn-like {
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    /* Transição para suavizar a mudança de cor no hover */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  /* Pseudo-classe :hover para quando o mouse passa por cima */
+  button:hover,
+  a.btn-like:hover {
+    transform: translateY(-2px); /* Animação sutil de levantar */
+  }
+  
+  /* Botão de submissão (Salvar, Criar) */
+  form button[type="submit"] {
+    background-color: #0a9396; /* Cor principal de ação */
+    color: white;
+  }
+  
+  form button[type="submit"]:hover {
+    background-color: #005f73; /* Cor mais escura no hover */
+  }
+  
+  /* --- ESTILOS PARA A LISTA DE TAREFAS --- */
+  ul {
+    list-style-type: none; /* Remove os marcadores (bolinhas) da lista */
+    padding: 0;
+    width: 100%;
+    max-width: 700px;
+  }
+  
+  ul li {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    /* Usando Flexbox para alinhar o conteúdo de cada tarefa */
+    display: flex;
+    justify-content: space-between; /* Coloca espaço máximo entre os itens */
+    align-items: center; /* Alinha verticalmente ao centro */
+    gap: 15px;
+  }
+  
+  /* Link de "Editar" dentro da lista */
+  ul li a {
+    color: #0a9396;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  ul li a:hover {
+    color: #005f73;
+    text-decoration: underline;
+  }
+  
+  /* Botão de deletar (usando o seletor de classe) */
+  .btn-delete {
+    background-color: #9b2226; /* Vermelho para ação de perigo */
+    color: white;
+    padding: 8px 15px; /* Botão um pouco menor */
+  }
+  
+  .btn-delete:hover {
+    background-color: #ae2012; /* Vermelho mais intenso no hover */
+  }
+  
+  /* Link "Nova Tarefa" na página principal */
+  body > a {
+    /* Estilizando para parecer um botão principal */
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #ee9b00; /* Laranja para destaque */
+    color: #000;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  body > a:hover {
+    background-color: #ca6702;
+    color: white;
+    transform: translateY(-2px);
+  }
+  
+  /* --- RESPONSIVIDADE --- */
+  /* Media Query para telas menores, como celulares */
+  @media (max-width: 600px) {
+    body {
+      padding: 10px;
+    }
+  
+    h1 {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+  
+    /* Na lista de tarefas, os itens ficarão empilhados em vez de lado a lado */
+    ul li {
+      flex-direction: column;
+      align-items: flex-start; /* Alinha os itens à esquerda */
+      gap: 10px;
+    }
+  
+    /* Centraliza o conteúdo dentro do item da lista */
+    ul li div {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }

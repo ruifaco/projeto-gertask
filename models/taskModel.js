@@ -6,21 +6,34 @@ class TaskModel {
     return result.rows;
   }
 
-  static async listarPorUsuario(idUsuario) {
-    const result = await db.query(
-      'SELECT * FROM tasks WHERE id_usuario = $1',
-      [idUsuario]
-    );
-    return result.rows;
+  static async buscarPorId(id) {
+    const result = await db.query('SELECT * FROM tasks WHERE id = $1', [id]);
+    return result.rows[0];
   }
 
-  static async criar({ id, titulo, prazo, inicio, id_usuario }) {
+  static async criar({ titulo, prazo, inicio, id_usuario }) {
     const result = await db.query(
-      'INSERT INTO tasks (id, titulo, prazo, inicio, id_usuario) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [id, titulo, prazo, inicio, id_usuario]
+      'INSERT INTO tasks (titulo, prazo, inicio, id_usuario) VALUES ($1, $2, $3, $4) RETURNING *',
+      [titulo, prazo, inicio, id_usuario]
     );
     return result.rows[0];
   }
-}
+  
+  
 
+  static async atualizar(id, { titulo, prazo, inicio, id_usuario }) {
+    const result = await db.query(
+      `UPDATE tasks 
+      SET titulo = $1, prazo = $2, inicio = $3, id_usuario = $4 
+      WHERE id = $5 
+      RETURNING *`,
+      [titulo, prazo, inicio, id_usuario, id]
+    );
+    return result.rows[0];
+  }
+  static async deletar(id) {
+    const result = await db.query('DELETE FROM tasks WHERE id = $1 RETURNING *', [id]);
+    return result.rows[0];
+  }  
+}
 module.exports = TaskModel;

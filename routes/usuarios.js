@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const userController = require('../controllers/userController');
 
-// importa o controller
-const usuariosController = require('../controllers/usuariosController');
+// --- API Endpoints ---
+router.get('/usuarios', userController.listarUsuarios);
+router.post('/usuarios', userController.criarUsuario);
 
-// usa a função do controller como callback da rota
-router.get('/usuarios', usuariosController.listarUsuarios);
-router.get('/usuarios/:id', usuariosController.buscarUsuarioPorId);
+// --- EJS 
+
+// Rota para exibir um formulário de criação de usuário
+router.get('/usuarios/novo', (req, res) => {
+  res.render('pages/newUser');
+});
 
 module.exports = router;

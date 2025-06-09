@@ -21,7 +21,8 @@ CREATE TABLE tasks (
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
 
-
 INSERT INTO tasks (id, titulo, prazo, inicio, id_usuario)
-VALUES
-  (1, 'academia', 5, '2025-07-20', 2);
+VALUES 
+  (1, 'Ir à academia', '2025-06-10 14:00:00', '2025-06-04', 1),
+  (2, 'Estudar Node.js', '2025-06-12 18:00:00', '2025-06-04', 1),
+  (3, 'Fazer compras', '2025-06-07 10:30:00', '2025-06-05', 2);

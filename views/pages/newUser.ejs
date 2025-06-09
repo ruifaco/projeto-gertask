@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Novo Usuário</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <h1>Criar Novo Usuário</h1>
+
+  <form id="form-novo-usuario">
+    <label for="email">Email:</label>
+    <input type="email" id="email" required><br>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" required><br>
+
+    <button type="submit">Criar Usuário</button>
+  </form>
+
+  <script>
+    document.getElementById('form-novo-usuario').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+
+      try {
+        const response = await fetch('/usuarios', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, senha }) 
+        });
+
+        if (response.ok) {
+          alert('Usuário criado com sucesso!');
+          window.location.href = '/tarefas'; 
+        } else {
+          const data = await response.json();
+          alert('Erro ao criar usuário: ' + (data.erro || 'Erro desconhecido'));
+        }
+      } catch (error) {
+        console.error('Erro na comunicação:', error);
+        alert('Falha na comunicação com o servidor.');
+      }
+    });
+  </script>
+</body>
+</html>

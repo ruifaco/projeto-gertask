@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Tarefas</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <h1>Minhas Tarefas</h1>
+
+  <ul>
+    <% tarefas.forEach(tarefa => { %>
+      <li>
+        <span><%= tarefa.titulo || 'Tarefa sem título' %></span>
+  
+        <div>
+          <a href="/tarefas/<%= tarefa.id %>/editar">Editar</a>
+          <button class="btn-delete" data-id="<%= tarefa.id %>">Deletar</button>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+
+  <a href="novo">Nova Tarefa</a>
+  <a href="/usuarios/novo">Novo Usuário</a>
+
+
+  <script>
+    document.querySelectorAll('.btn-delete').forEach(botao => {
+      botao.addEventListener('click', async () => {
+        if (!confirm('Tem certeza que deseja excluir esta tarefa?')) return;
+
+        const id = botao.getAttribute('data-id');
+
+        try {
+          const res = await fetch(`/tasks/${id}`, {
+            method: 'DELETE'
+          });
+
+          if (res.ok) {
+            alert('Tarefa excluída com sucesso!');
+            location.reload();
+          } else {
+            const data = await res.json();
+            alert('Erro ao excluir: ' + (data.erro || 'Erro desconhecido'));
+          }
+        } catch (erro) {
+          console.error(erro);
+          alert('Erro na comunicação com o servidor');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

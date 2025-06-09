@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nova Tarefa</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <h1>Nova Tarefa</h1>
+
+  <form id="form-nova">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" required><br>
+
+    <label for="prazo">Prazo:</label>
+    <input type="date" id="prazo" required><br>
+
+    <label for="inicio">Início:</label>
+    <input type="date" id="inicio" required><br>
+
+    <label for="id_usuario">ID do Usuário:</label>
+    <input type="text" id="id_usuario" required><br>
+
+    <button type="submit">Criar</button>
+  </form>
+
+  <script>
+    document.getElementById('form-nova').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const titulo = document.getElementById('titulo').value;
+      const prazo = document.getElementById('prazo').value;
+      const inicio = document.getElementById('inicio').value;
+      const id_usuario = document.getElementById('id_usuario').value;
+
+      await fetch('/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, prazo, inicio, id_usuario })
+      });
+
+      window.location.href = '/tarefas';
+    });
+  </script>
+</body>
+</html>

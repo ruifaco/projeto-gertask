@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Tarefa</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <h1>Editar Tarefa</h1>
+
+  <form id="form-editar">
+    <input type="hidden" id="id" value="<%= tarefa.id %>">
+
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" value="<%= tarefa.titulo %>" required><br>
+
+    <label for="prazo">Prazo:</label>
+    <input type="date" id="prazo" name="prazo" 
+      value="<%= tarefa.prazo ? tarefa.prazo.toISOString().split('T')[0] : '' %>" 
+      required><br>
+    
+    <label for="inicio">Início:</label>
+    <input type="date" id="inicio" name="inicio" 
+      value="<%= tarefa.inicio ? tarefa.inicio.toISOString().split('T')[0] : '' %>" 
+      required><br>
+    
+
+    <label for="id_usuario">ID do Usuário:</label>
+    <input type="text" id="id_usuario" value="<%= tarefa.id_usuario %>" required><br>
+
+    <button type="submit">Salvar</button>
+  </form>
+
+  <script>
+    document.getElementById('form-editar').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const id = document.getElementById('id').value;
+      const titulo = document.getElementById('titulo').value;
+      const prazo = document.getElementById('prazo').value;
+      const inicio = document.getElementById('inicio').value;
+      const id_usuario = document.getElementById('id_usuario').value;
+
+      await fetch(`/api/tarefas/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, prazo, inicio, id_usuario })
+      });
+
+      window.location.href = '/tarefas';
+    });
+  </script>
+</body>
+</html>
