@@ -46,7 +46,7 @@ _Posicione aqui a lista de User Stories levantadas para o projeto. Siga o templa
 
 ## Diagrama do Projeto
 
-![Diagrama do Projeto](../assets/modelo-banco_page-0001.jpg)
+![Diagrama do Projeto](../assets/diagramamvc.png)
 
 ```
 CREATE TABLE usuarios (
