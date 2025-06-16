@@ -147,3 +147,33 @@ A API segue os princípios REST. Abaixo estão os endpoints principais:
 | `GET`  | `/tasks`          | Lista todas as tarefas.         |
 | `PUT`  | `/tasks/:id`      | Atualiza uma tarefa existente.  |
 | `DELETE` | `/tasks/:id`    | Deleta uma tarefa.              |
+
+## Uso da interface na prática
+Aqui está a página principal da aplicação:
+
+<img src="assets/home.png" width="500">
+
+
+Dentro dela, temos 2 caminhos principais:
+
+
+1. **Editar** ou **excluir** uma task já criada
+2. Criar novo usuário ou nova task:
+
+<img src="assets/newuser.png" width="500">
+
+
+Para executarmos a primeira opção, basta apertar na opção de editar ou excluir uma tasks, dependendo da intenção do usuário.
+
+Já para criar, seja uma nova tarefa ou usuário, devemos seguir os caminhos necessários. Para criar uma nova tarefa o usuário deve clicar no botão "criar tarefa" e a página o redicionará para essa página:
+
+<img src="assets/newtask.png" width="500">
+
+Então o usuário deve preencher os campos necessários para atingir seu objetivo. Os campos são: título da tarefa, data de início e prazo que ela vai durar e o ID do usuário o qual aquela tarefa criada será atribuída. Após esse procedimento, basta clicar no botão "criar".
+
+Para criar um novo usuário, é necessário criar, na página principal, o botão "criar novo usuário". Ele irá direcionar o usuário para a página abaixo:
+
+<img src="assets/newuser.png" width="500">
+
+No exemplo, já há um usuário sendo criado apenas à título de ilustração, mas o usuário deve escrever e-mail em formato "@gmail.com" e a senha daquele usuário. Feito isso, será criado um novo usuário!
+

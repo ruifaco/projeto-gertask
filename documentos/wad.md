@@ -202,13 +202,11 @@ O mecanismo funciona da seguinte forma:
 
 ### 4.1 Demonstração do Sistema Web (Semana 8)
 
-_VIDEO: Insira o link do vídeo demonstrativo nesta seção_
-_Descreva e ilustre aqui o desenvolvimento do sistema web completo, explicando brevemente o que foi entregue em termos de código e sistema. Utilize prints de tela para ilustrar._
+<a href="https://drive.google.com/file/d/1TmZnrAnoClzLBa9znLR05xO-38345DDQ/view?usp=sharing" target="_blank">Assista ao vídeo</a>
 
 ### 4.2 Conclusões e Trabalhos Futuros (Semana 8)
 
-_Indique pontos fortes e pontos a melhorar de maneira geral._
-_Relacione também quaisquer outras ideias que você tenha para melhorias futuras._
+A aplicação está funcionando de maneira performática para o que se propõe. Ela executa as modificações do usuário no banco de dados e respeita o fluxo do diagrama MVC. Para trabalhos futuros, a aplicação deve aumentar as suas operações CRUD, principalmente na parte de usuários. Idealmente, a plataforma possuirá opções de listar e deletar, usuários, por exemplo. Esta primeira versão da aplicação priorizou a gestão eficiente de tarefas, e para ser mais efetiva, é necessário tornar a aplicação robusta para o lado da gestão dos usuários também.
 
 ## <a name="c5"></a>5. Referências
 
